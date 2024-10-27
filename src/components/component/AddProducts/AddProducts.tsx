@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useAddBikeMutation } from "../../../redux/Bikes/BikesApi";
-// import axios from 'axios';
+import axios from 'axios';
 import Swal from "sweetalert2";
 
 
-// const img_hosting_token = "622e0d92c5c1dfc5ba8cf9cab3a6e860";
-// const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
+const img_hosting_token = "622e0d92c5c1dfc5ba8cf9cab3a6e860";
+const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
 const AddProducts = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ const AddProducts = () => {
 
   const [addBike] = useAddBikeMutation();
 
-  const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     setFormData((prevData) => ({
@@ -33,24 +33,24 @@ const AddProducts = () => {
     }));
   };
 
-  // const handlePhotoUpload = async (file) => {
-  //   const formData = new FormData();
-  //   formData.append('image', file);
+  const handlePhotoUpload = async (file: File) => {
+    const formData = new FormData();
+    formData.append('image', file);
 
-  //   try {
-  //     const response = await axios.post(img_hosting_url, formData);
-  //     return response.data.data.display_url; // Return the URL of the uploaded image
-  //   } catch (error) {
-  //     console.error("Failed to upload image:", error);
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Image upload failed",
-  //       text: "Please try again.",
-  //     });
-  //   }
-  // };
+    try {
+      const response = await axios.post(img_hosting_url, formData);
+      return response.data.data.display_url; // Return the URL of the uploaded image
+    } catch (error) {
+      console.error("Failed to upload image:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Image upload failed",
+        text: "Please try again.",
+      });
+    }
+  };
 
-  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
@@ -72,7 +72,7 @@ const AddProducts = () => {
         year: "",
         model: "",
         brand: "",
-        photo: ''
+        photo: ""
       });
 
     } catch (error) {
@@ -81,12 +81,11 @@ const AddProducts = () => {
         icon: "error",
         title: "Form submission failed",
       });
-      
     }
   };
 
-  return  (
-    <div className="w-2/3 mx-auto mt-10">
+  return (
+    <div className="  w-2/3 mx-auto mt-10">
       <h2 className="text-3xl mb-2 font-bold text-center mt-5">
         Add <span className="text-red-500">New</span> Bikes?
       </h2>
@@ -99,8 +98,7 @@ const AddProducts = () => {
           onSubmit={handleSubmit}
           className="max-w-md mx-auto p-4 bg-white shadow-2xl rounded"
         >
-          <div className="">
-            <div className="relative mt-8">
+          <div className="relative mt-8">
               <input
                 type="text"
                 name="name"
@@ -226,37 +224,20 @@ const AddProducts = () => {
                 Price Per Hour
               </label>
             </div>
-            <div className="relative mt-8">
-              <input
-                type="text"
-                name="photo"
-                id="photo"
-                className="border-b py-1 w-full focus:outline-none focus:border-red-500 focus:border-b-2 transition-colors duration-1000 peer"
-                autoComplete="off"
-                value={formData.photo}
-                onChange={handleChange}
-                required
-              />
-              <label
-                htmlFor="photo"
-                className="absolute top-1 left-0 cursor-text peer-focus:text-xs peer-focus:text-red-500 peer-focus:-top-4 peer-valid:text-xs peer-valid:text-red-500 peer-valid:-top-4 transition-all duration-1000"
-              >
-                Photo Link
-              </label>
-            </div>
-            {/* <div className="mt-3">
-              <input
-                type="file"
-                onChange={async (e) => {
-                  const file = e.target.files[0];
-                  const photoUrl = await handlePhotoUpload(file);
+          <div className="mt-3">
+            <input
+              type="file"
+              onChange={async (e) => {
+                const file = e.target.files?.[0]; // Get the selected file
+                if (file) {
+                  const photoUrl = await handlePhotoUpload(file); // Upload the file
                   setFormData((prevData) => ({
                     ...prevData,
-                    photo: photoUrl,
+                    photo: photoUrl, // Set the photo URL to the form data
                   }));
-                }}
-              />
-            </div> */}
+                }
+              }}
+            />
           </div>
           <button
             type="submit"
@@ -271,4 +252,3 @@ const AddProducts = () => {
 };
 
 export default AddProducts;
-

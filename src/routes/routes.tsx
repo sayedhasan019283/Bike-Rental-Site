@@ -14,6 +14,10 @@ import ProtectedRoute from "../components/layout/ProtectedRoute";
 import AllRentals from "../components/component/AllRentals/AllRentals";
 import SingleRental from "../components/component/SingleRental/SingleRental";
 import AboutUs from "../components/component/AboutUs/AboutUs";
+import AllUsers from "../components/component/AllUsers/AllUsers";
+import Checkout from "../components/component/Checkout/Checkout";
+import History from "../components/component/History/History";
+import SearchResults from "../components/component/SearchResult/SearchResults";
 
 const router = createBrowserRouter([
   {
@@ -49,8 +53,16 @@ const router = createBrowserRouter([
         element: <AllRentals />,
       },
       {
+        path: "rentals/checkout/:id",
+        element: <Checkout />,
+      },
+      {
         path: "about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "search-result",
+        element: <SearchResults />,
       },
       {
         path: "/:id/single",
@@ -77,8 +89,24 @@ const router = createBrowserRouter([
             element: <AllBikesForDashboard />,
           },
           {
+            path: "rental-history",
+            element: <History />,
+          },
+          {
             path: "all-bikes/:id",
-            element: <UpdateBike />,
+            element: (
+              <ProtectedRoute role="admin">
+                <UpdateBike />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "all-users",
+            element: (
+              <ProtectedRoute role="admin">
+                <AllUsers />
+              </ProtectedRoute>
+            ),
           },
         ],
       },

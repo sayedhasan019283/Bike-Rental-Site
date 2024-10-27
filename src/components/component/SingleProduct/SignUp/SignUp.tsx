@@ -11,7 +11,7 @@ const SignUp = () => {
     password: "",
     phone: "",
     address: "",
-    role: "",
+    role: "user",
   });
 
   const [signUp] = useSignUpMutation();
@@ -59,7 +59,7 @@ const SignUp = () => {
   return (
     <div className="">
       <form onSubmit={handleSubmit} action="">
-        <div className="w-2/6 mx-auto border p-5 m-10 border-red-500 border-r-2  shadow-xl ">
+        <div className="sm:w-3/6 md:w-3/6 lg:w-2/6 mx-auto border p-5 m-10 border-red-500 border-r-2  shadow-xl ">
           <h1 className="text-2xl font-bold text-center">Sign Up</h1>
           <div className="flex justify-center mt-2 mb-6">
             <div className="h-1 w-8 rounded-lg text-center bg-red-500"></div>
@@ -154,7 +154,7 @@ const SignUp = () => {
               Your Address
             </label>
           </div>
-          <div className="relative mt-8 m-10">
+          {/* <div className="relative mt-8 m-10">
             <input
               type="role"
               name="role"
@@ -171,13 +171,17 @@ const SignUp = () => {
             >
               Your Roll
             </label>
-          </div>
+          </div> */}
           <button
             type="submit"
             className="w-full bg-red-500 text-white py-2 rounded-md mt-5 hover:bg-orange-500 transition-colors duration-700 ease-in-out"
           >
             Sign Up
           </button>
+          <div className="">
+            <p className="text-center p-3">Already have an account? <a className="text-blue-500 underline" href="/login">Login</a>
+            </p>
+          </div>
         </div>
       </form>
     </div>

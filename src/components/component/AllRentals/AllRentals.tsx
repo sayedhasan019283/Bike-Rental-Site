@@ -6,7 +6,7 @@ import {
 } from "../../../redux/Bikes/BikesApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
 // import { NavLink } from "react-router-dom";
 
 interface Bike {
@@ -34,13 +34,13 @@ const AllRentals: React.FC = () => {
     data: rentals,
     error: rentalsError,
     isLoading: rentalsLoading,
-    refetch,
+    // refetch,
   } = useGetRentalsQuery(undefined);
   const {
     data: bikes,
     error: bikesError,
     isLoading: bikesLoading,
-    refetch : bikeRefetch
+    // refetch: bikeRefetch,
   } = useGetBikesQuery(undefined); // Assume this fetches all bikes
   const [returnRental] = useReturnRentalMutation();
   // Define the type for bikeMap
@@ -60,22 +60,17 @@ const AllRentals: React.FC = () => {
     }
   }, [bikes]);
 
+  
+
   const handleReturn = async (id: string) => {
-    
-   try {
-    await returnRental(id).unwrap();
-    console.log(id)
-    Swal.fire({
-        icon: "success",
-        title: "Bike Returned Successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      refetch()
-      bikeRefetch()
-   } catch (error) {
-    console.log(error)
-   }
+    try {
+      await returnRental(id).unwrap();
+      console.log(id);
+      // refetch();
+      // bikeRefetch();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (rentalsLoading || bikesLoading) return <p>Loading...</p>;
@@ -110,12 +105,15 @@ const AllRentals: React.FC = () => {
                 <div>
                   <h1>{bike?.name}</h1>
                   <p>location</p>
-                  <button
+                  <NavLink to={`checkout/${rental?._id}`}
                     onClick={() => handleReturn(rental?._id)}
+                    // onClick={() =>
+                    //   document.getElementById("my_modal_3").showModal()
+                    // }
                     className="btn bg-red-500 text-white py-2 px-4 mt-3 font-bold"
                   >
                     Return
-                  </button>
+                  </NavLink>
                 </div>
                 <div className="ml-auto text-right">
                   <h3>$100</h3>
@@ -130,6 +128,25 @@ const AllRentals: React.FC = () => {
                   </p>
                 </div>
               </div>
+
+
+              {/* modal body starts hear */}
+
+
+              <dialog id="my_modal_3" className="modal">
+                <div className="modal-box">
+                  <form method="dialog">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                      ✕
+                    </button>
+                  </form>
+                  <h3 className="font-bold text-lg">Hello!</h3>
+                  <p className="py-4">
+                    Press ESC key or click on ✕ button to close
+                  </p>
+                </div>
+              </dialog>
             </div>
           );
         })}

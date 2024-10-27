@@ -20,7 +20,6 @@ const HomePage = () => {
             <CustomerReview/>
             <ImageGallery/>
             <WhyOurBikes/>
-            
             <AppInfo/>
             
         </div>

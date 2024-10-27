@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {bikeApi} from './Bikes/BikesApi'
 import { baseApi } from "./api/baseApi";
-
+import bikeReducer from './features/bikeSlice'
 export const store = configureStore({
   reducer: {
+    bike: bikeReducer,
     [bikeApi.reducerPath]: bikeApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

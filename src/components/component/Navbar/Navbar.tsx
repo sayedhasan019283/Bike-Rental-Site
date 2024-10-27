@@ -1,23 +1,57 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useGetProfileQuery } from "../../../redux/Bikes/BikesApi";
-// import {  useAppSelector } from "../redux/hooks";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faPlus, faMinus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  useGetProfileQuery,
+  // useSearchItemsQuery,
+} from "../../../redux/Bikes/BikesApi";
+// import { useAppDispatch } from "../../../redux/hooks";
+// import { addBike } from "../../../redux/features/bikeSlice";
+// import { TBike } from "../../../Types/bike";
 
 const Navbar = () => {
-  // const { products, total } = useAppSelector((state) => state.cart);
-  const [search, setSearch] = useState("");
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(search);
-  };
-
+  // const [searchQuery, setSearchQuery] = useState('');
+  // const [searchTrigger, setSearchTrigger] = useState('');
+  // const dispatch = useAppDispatch();
   const { data: profile } = useGetProfileQuery(undefined);
 
-  console.log(profile?.data?.role)
+  console.log(profile?.data?.role);
 
-  const isAdmin = profile?.data?.role === 'admin';
+  const userExist = profile?.data?.role;
+
+  const isAdmin = profile?.data?.role === "admin";
+
+  // const { data: searchResults } = useSearchItemsQuery(searchTrigger);
+
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearchQuery(e.target.value);
+  // };
+
+  // const handleSearch =  () => {
+  //   // Trigger the search by updating searchTrigger state
+  //   setSearchTrigger(searchQuery);
+  //   console.log(searchResults)
+  //   try {
+  //     // Wait for the search results to be fetched based on the updated searchTrigger
+  //     const results =  searchResults; // Wait for searchResults to be available
+
+  //     if (results?.length > 0) {
+  //       // Dispatch each bike individually to the Redux store
+  //       results.forEach((bike: TBike) => {
+  //         dispatch(addBike(bike));
+  //       });
+  //     } else {
+  //       console.log("No bikes found");
+  //     }
+
+  //     console.log("Search results:", results);
+  //   } catch (error) {
+  //     console.error("Error fetching search results:", error);
+  //   }
+  // };
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken')
+  }
 
   useEffect(() => {}, []);
   return (
@@ -27,7 +61,7 @@ const Navbar = () => {
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-5 w-5 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -63,6 +97,22 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
+        <li>
+            {isAdmin ? (
+              <NavLink
+                to="/admin-dashboard/add-products"
+                className={({ isActive }) =>
+                  `text-white px-2 py-1 transition-colors duration-300 ${
+                    isActive ? "bg-red-500" : "hover:bg-red-500"
+                  }`
+                }
+              >
+                Dashboard
+              </NavLink>
+            ) : (
+              <p></p>
+            )}
+          </li>
           <li>
             <NavLink
               to="/bikes/all-bikes"
@@ -75,30 +125,18 @@ const Navbar = () => {
               All Bikes
             </NavLink>
           </li>
+         
           <li>
-          {isAdmin ? (
-        <NavLink
-          to="/admin-dashboard/add-products"
-          className={({ isActive }) =>
-            `text-white px-2 py-1 transition-colors duration-300 ${
-              isActive ? 'bg-red-500' : 'hover:bg-red-500'
-            }`
-          }
-        >
-          Dashboard
-        </NavLink>
-      ) : (
-        <NavLink
-          to="/rentals"
-          className={({ isActive }) =>
-            `text-white px-2 py-1 transition-colors duration-300 ${
-              isActive ? 'bg-red-500' : 'hover:bg-red-500'
-            }`
-          }
-        >
-          My Rentals
-        </NavLink>
-      )}
+          <NavLink
+                to="/rentals"
+                className={({ isActive }) =>
+                  `text-white px-2 py-1 transition-colors duration-300 ${
+                    isActive ? "bg-red-500" : "hover:bg-red-500"
+                  }`
+                }
+              >
+                My Rentals
+              </NavLink>
           </li>
           <li>
             <NavLink
@@ -112,25 +150,43 @@ const Navbar = () => {
               About Us
             </NavLink>
           </li>
+          
         </ul>
       </div>
 
       <div className="flex navbar-end">
-        <div className="hidden sm:block">
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Search"
-              className="input input-bordered w-24 md:w-auto mr-3"
-              onBlur={(e) => setSearch(e.target.value)}
-            />
-            <button type="submit" className="mr-3 text-white">
-              Search
-            </button>
-          </form>
-        </div>
+        {/* <div className="hidden sm:block">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleInputChange}
+            placeholder="Search items"
+            className="px-4 py-2 rounded-md"
+          />
+          <NavLink
+          to='/search-result'
+            onClick={handleSearch}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md ml-2"
+          >
+            Search
+          </NavLink>
+        </div> */}
         <div>
-          <h2 className="text-white">Login</h2>
+          {userExist ? (
+            <NavLink 
+            to='/login' 
+            className="text-white border hover:bg-red-500  p-3"
+            onClick={handleLogout}
+            >
+              Log out
+            </NavLink>
+          ) : (
+            <NavLink
+            to='/sign-up'
+             className="text-white border hover:bg-red-500  p-3">
+              Sign Up
+            </NavLink>
+          )}
         </div>
         <div className="dropdown dropdown-end ">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle ">

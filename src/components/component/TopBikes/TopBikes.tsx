@@ -1,10 +1,10 @@
 const TopBikes = () => {
   return (
-    <div className=" grid grid-cols-2 mb-4">
+    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  mb-4">
       <div className="grid-cols-1">
         <img
           src="https://res.cloudinary.com/sayed-ltd/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1724611093/harley-davidson-1Lg7p5hC2pI-unsplash_njyu57.jpg"
-          alt=""
+          alt="Top Bike"
         />
       </div>
       <div className="grid-cols-1 bg-black">
