@@ -4,55 +4,56 @@ import Swal from "sweetalert2";
 import { useLoginMutation } from "../../../redux/Bikes/BikesApi";
 
 const Login = () => {
-    const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-      
-      email: "",
-      password: "",
-     
-    });
-  
-  const [login] = useLoginMutation()
-    const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.target;
-  
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    };
-  
-    const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [login] = useLoginMutation();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
       const result = await login(formData).unwrap();
-        console.log(result?.token)
-        localStorage.setItem('authToken', result?.token)
 
-      try {
+      // Store the token and show success message
+      localStorage.setItem("authToken", result.token);
+      Swal.fire({
+        icon: "success",
+        title: "Logged in successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
 
-        console.log(formData);
-        Swal.fire({
-          icon: "success",
-          title: "sign Up Successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate('/');
-  
-        setFormData({
-          
-          email: "",
-          password: "",
-          
-        });
-      } catch (error) {
-        console.log(error);
-        Swal.fire({
-          icon: "error",
-          title: "Form submission failed",
-        });
-      }
-    };
+      // Navigate to the home page
+      navigate("/");
+
+      // Reset the form
+      setFormData({
+        email: "",
+        password: "",
+      });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      // Show error message with Swal
+      Swal.fire({
+        icon: "error",
+        title: "Login failed",
+        text: error?.data?.message  || "An error occurred during login. Please try again.",
+      });
+      console.error("Login error:", error);
+    }
+  };
   return (
     <div className="">
       <form onSubmit={handleSubmit} action="">

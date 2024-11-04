@@ -100,7 +100,7 @@ const Navbar = () => {
         <li>
             {isAdmin ? (
               <NavLink
-                to="/admin-dashboard/add-products"
+                to="/admin-dashboard/dashboard"
                 className={({ isActive }) =>
                   `text-white px-2 py-1 transition-colors duration-300 ${
                     isActive ? "bg-red-500" : "hover:bg-red-500"

@@ -47,12 +47,14 @@ const SignUp = () => {
         address: "",
         role: "",
       });
-    } catch (error) {
-      console.log(error);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error : any) {
       Swal.fire({
         icon: "error",
-        title: "Form submission failed",
+        title: "Signup failed",
+        text: error?.data?.message  || "An error occurred during login. Please try again.",
       });
+      console.error("Login error:", error);
     }
   };
 

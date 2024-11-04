@@ -47,6 +47,12 @@ export const bikeApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getAllRentals: builder.query({
+      query: () => ({
+        url: "/api/rental",
+        method: "GET",
+      }),
+    }),
 
     createRental: builder.mutation({
       query: (data) => ({
@@ -146,6 +152,7 @@ export const {
   useReturnRentalMutation,
   useSignUpMutation,
   useLoginMutation,
+  useGetAllRentalsQuery,
   usePaymentbookingBikeMutation,
   useGetProfileQuery,
   useGetAllUsersQuery,

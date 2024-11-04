@@ -1,14 +1,18 @@
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const HowItWorks = () => {
+  AOS.init();
   return (
     <div>
-      <h2 className="text-3xl mb-2 font-bold text-center mt-5">
+      <h2 className="text-3xl mb-2 font-bold text-center mt-5" >
         How <span className="text-red-500">It</span> Works?
       </h2>
       <div className="flex justify-center mt-2 mb-6">
         <div className="h-2 w-12 rounded-lg text-center bg-red-500"></div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 w-3/5 mx-auto">
-  <div className="border border-red-500 p-7">
+  <div className="border border-red-500 p-7" data-aos="fade-right">
     <div className="flex items-center justify-center">
       <img
         src="https://res.cloudinary.com/sayed-ltd/image/upload/v1724606437/Capture2_nvox3l.png"
@@ -29,7 +33,7 @@ const HowItWorks = () => {
     </div>
   </div>
 
-  <div className="border border-red-500 p-7">
+  <div className="border border-red-500 p-7" data-aos="fade-up">
     <div className="flex items-center justify-center">
       <img
         src="https://res.cloudinary.com/sayed-ltd/image/upload/v1724606431/Capture_jx0sqe.png"
@@ -50,7 +54,7 @@ const HowItWorks = () => {
     </div>
   </div>
 
-  <div className="border border-red-500 p-7">
+  <div className="border border-red-500 p-7" data-aos="fade-left">
     <div className="flex items-center justify-center">
       <img
         src="https://res.cloudinary.com/sayed-ltd/image/upload/v1724606443/Capture3_ak2dvz.png"

@@ -1,19 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const CustomerReview = () => {
+  AOS.init();
   return (
     <div className="relative">
-      <h2 className="text-3xl mb-2 font-bold text-center mt-5">
+      <h2 className="text-3xl mb-2 font-bold text-center mt-5" >
         Happy <span className="text-red-500">Customers</span> Say's
       </h2>
       <div>
         <div className="flex justify-center mt-2 mb-6">
-          <div className=" h-2 w-12 bg-red-500 rounded-lg text-center "></div>
+          <div className=" h-2 w-12 bg-red-500 rounded-lg text-center " data-aos="fade-right"></div>
         </div>
 
-        <div className="bg-base-200 h-72 mb-5 grid grid-cols-3">
+        <div className="bg-base-200 h-72 mb-5 grid grid-cols-3" >
           <div className="bg-red-500 h-72 grid-cols-1 rounded-tr-3xl rounded-br-3xl  hidden sm:hidden md:block"></div>
           <div className="col-span-2 mt-10 ml-32">
             <h1 className="text-2xl font-bold">Sayed Hossain</h1>

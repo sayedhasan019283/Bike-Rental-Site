@@ -18,6 +18,8 @@ import AllUsers from "../components/component/AllUsers/AllUsers";
 import Checkout from "../components/component/Checkout/Checkout";
 import History from "../components/component/History/History";
 import SearchResults from "../components/component/SearchResult/SearchResults";
+import Dashboard from "../components/component/Dashboard/Dashboard";
+import Earnings from "../components/component/Earnings/Earnings";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +83,22 @@ const router = createBrowserRouter([
             element: (
               <ProtectedRoute role="admin">
                 <AddProducts />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "dashboard",
+            element: (
+              <ProtectedRoute role="admin">
+                <Dashboard/>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "earnings",
+            element: (
+              <ProtectedRoute role="admin">
+                <Earnings/>
               </ProtectedRoute>
             ),
           },

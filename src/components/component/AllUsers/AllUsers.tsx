@@ -3,6 +3,7 @@ import {
   JSXElementConstructor,
   ReactNode,
   ReactPortal,
+  Key,
 } from "react";
 import {
   useGetAllUsersQuery,
@@ -37,42 +38,66 @@ const AllUsers = () => {
   };
   return (
     <div className="mb-2">
-      {allUsers?.map(
-        (user: {
-          _id(_id: unknown): void;
-          email: ReactNode;
-          role: ReactNode;
-          name:
-            | string
-            | number
-            | boolean
-            | ReactElement<unknown, string | JSXElementConstructor<unknown>>
-            | Iterable<ReactNode>
-            | ReactPortal
-            | null
-            | undefined;
-        }) => (
-          <div className=" mb-5 mt-2 shadow-xl">
-            <div className="flex justify-between w-full">
-              <div>
-                <h1>{user?.email}</h1>
-              </div>
-              <div className="text-right sm:block md:block">
-                <h1>{user?.role}</h1>
-              </div>
-              <div>
-                <button
-                  className="btn"
-                  onClick={() => handlePromote(user?._id)}
-                  disabled={isLoading}
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white shadow-md rounded">
+          <thead>
+            <tr className="bg-gray-200 text-gray-600 text-sm leading-normal">
+              <th className="py-3 px-6 text-left">User Gmail</th>
+              <th className="py-3 px-6 text-left">Role</th>
+              <th className="py-3 px-6 text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody className="text-gray-600 text-sm">
+            {allUsers?.map(
+              (
+                user: {
+                  _id(_id: unknown): void;
+                  email: ReactNode;
+                  role: ReactNode;
+                  name:
+                    | string
+                    | number
+                    | boolean
+                    | ReactElement<
+                        unknown,
+                        string | JSXElementConstructor<unknown>
+                      >
+                    | Iterable<ReactNode>
+                    | ReactPortal
+                    | null
+                    | undefined;
+                },
+                index: Key | null | undefined
+              ) => (
+                <tr
+                  key={index}
+                  className="border-b border-gray-200 hover:bg-gray-100"
                 >
-                  Promote to admin
-                </button>
-              </div>
-            </div>
-          </div>
-        )
-      )}
+                  <td className="py-3 px-6 text-left">{user?.email}</td>
+                  <td className="py-3 px-6 text-left">{user?.role}</td>
+                  <td className="py-3 px-6 text-center">
+                    {user?.role === "admin" ? (
+                      <div>
+                        <p>Already admin</p>
+                      </div>
+                    ) : (
+                      <div>
+                        <button
+                          className="btn"
+                          onClick={() => handlePromote(user?._id)}
+                          disabled={isLoading}
+                        >
+                          Promote to admin
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              )
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

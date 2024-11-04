@@ -1,4 +1,8 @@
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const WhyOurBikes = () => {
+  AOS.init();
   return (
     <div className="bg-base-200 p-4 mb-4 ">
       <h2 className="text-3xl mb-2 font-bold text-center mt-5">
@@ -9,7 +13,7 @@ const WhyOurBikes = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full md:w-4/5 lg:w-3/5 mx-auto gap-4">
   <div className="col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div className="flex bg-white p-4 rounded-md">
+    <div className="flex bg-white p-4 rounded-md" data-aos="fade-right">
       <div className="w-1/3">
         <img
           src="https://res.cloudinary.com/sayed-ltd/image/upload/v1724666822/Capture11_p3o8r4.png"
@@ -24,7 +28,7 @@ const WhyOurBikes = () => {
         </p>
       </div>
     </div>
-    <div className="flex bg-white p-4 rounded-md">
+    <div className="flex bg-white p-4 rounded-md" data-aos="fade-left">
       <div className="w-1/3">
         <img
           src="https://res.cloudinary.com/sayed-ltd/image/upload/v1724666842/Capture22_mzvpaj.png"
@@ -39,7 +43,7 @@ const WhyOurBikes = () => {
         </p>
       </div>
     </div>
-    <div className="flex bg-white p-4 rounded-md">
+    <div className="flex bg-white p-4 rounded-md" data-aos="fade-right">
       <div className="w-1/3">
         <img
           src="https://res.cloudinary.com/sayed-ltd/image/upload/v1724666843/Capture33_rj7jvi.png"
@@ -54,7 +58,7 @@ const WhyOurBikes = () => {
         </p>
       </div>
     </div>
-    <div className="flex bg-white p-4 rounded-md">
+    <div className="flex bg-white p-4 rounded-md" data-aos="fade-left">
       <div className="w-1/3">
         <img
           src="https://res.cloudinary.com/sayed-ltd/image/upload/v1724666854/Capture44_ducsx2.png"

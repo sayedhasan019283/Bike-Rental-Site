@@ -43,9 +43,9 @@ const AllBikesForDashboard = () => {
   return (
     <div>
       <div className=" bg-base-200">
-        <div className=" mt-6">
+        <div className=" py-10 ">
           <div className="w-4/5 mx-auto">
-            <h2 className="text-3xl mb-2 font-bold text-center mt-5">
+            <h2 className="text-3xl mb-2 font-bold text-center ">
               All <span className="text-red-500">Bikes</span> Hear!
             </h2>
             <div className="flex justify-center mt-2 mb-6">
