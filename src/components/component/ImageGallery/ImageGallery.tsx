@@ -1,6 +1,6 @@
 const images = [
     { index: 0, imgUrl: "https://res.cloudinary.com/sayed-ltd/image/upload/e_improve,w_300,h_600,c_thumb,g_auto/v1724602650/harley-davidson-wxSb4-Lxt3Y-unsplash_jgo6d9.jpg" },
-    { index: 1, imgUrl: "https://res.cloudinary.com/sayed-ltd/image/upload/v1721029447/image/yogendra-singh-dE3exzmYlKc-unsplash_n4ola8.jpg" },
+    { index: 1, imgUrl: "https://res.cloudinary.com/sayed-ltd/image/upload/v1724603990/istockphoto-507636756-1024x1024_gdhcea.jpg" },
     { index: 2, imgUrl: "https://res.cloudinary.com/sayed-ltd/image/upload/v1724601933/logan-weaver-lgnwvr-0fiuoIIfl9g-unsplash_1_moiaxv.jpg" },
     { index: 3, imgUrl: "https://res.cloudinary.com/sayed-ltd/image/upload/v1724602650/harley-davidson-wxSb4-Lxt3Y-unsplash_jgo6d9.jpg" },
     { index: 4, imgUrl: "https://res.cloudinary.com/sayed-ltd/image/upload/v1724603990/istockphoto-507636756-1024x1024_gdhcea.jpg" },

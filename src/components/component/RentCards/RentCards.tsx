@@ -10,7 +10,7 @@ const RentCards = () => {
       <h2 className="text-3xl mb-2 font-bold text-center mt-5" data-aos="fade-right">
         Bikes <span className="text-red-500">For</span> Rent
       </h2>
-      <div className="flex justify-center mt-2 mb-6" >
+      <div className="flex justify-center mt-2 mb-6" data-aos="fade-left">
         <div className="h-2 w-12 rounded-lg text-center bg-red-500"></div>
       </div>
       <div className="  gap-5 w-3/5 mx-auto ">

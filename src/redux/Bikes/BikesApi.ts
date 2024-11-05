@@ -9,8 +9,10 @@ export const bikeApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getBikes: builder.query({
       query: () => ({
-        url: "/api/bikes",
-        method: "GET",
+        // { page = 1, limit = 3 }
+        url: 'api/bikes',
+        method: 'GET',
+        // params: { page, limit },
       }),
     }),
     getSingleBike: builder.query({

@@ -15,7 +15,7 @@ const MainLayout = () => {
   }
 
   return (
-  <div className={`${darkMode && 'dark'} w-full relative `}>
+  <div className={`${darkMode && 'dark'} w-full relative overflow-x-hidden`}>
       <div className="dark:bg-black">
       <Navbar/>
       <Outlet/>

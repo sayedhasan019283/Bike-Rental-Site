@@ -24,8 +24,8 @@ const AllBikes = () => {
   const [isDairyOpen, setIsDairyOpen] = useState(true);
   const [isQuantityOpen, setIsQuantityOpen] = useState(true);
   const [priceRange, setPriceRange] = useState([1, 15]);
-
-  const [filters, setFilters] = useState({ brand: "", price: "" });
+  // setFilters
+  const [filters] = useState({ brand: "", price: "" });
   const { data: bikes } = useGetBikesQuery(undefined);
   const { data: products } = useGetFilteredProductsQuery(filters);
   console.log(bikes?.data);
@@ -36,13 +36,13 @@ const AllBikes = () => {
     setOpen((prev) => !prev);
   };
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFilters({
-      ...filters,
-      [name]: value,
-    });
-  };
+  // const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFilters({
+  //     ...filters,
+  //     [name]: value,
+  //   });
+  // };
   AOS.init();
   return (
     <div className="grid grid-cols-1  lg:grid-cols-5  ">
@@ -251,12 +251,15 @@ const AllBikes = () => {
         </div>
       </div>
       <div className="col-span-4 bg-base-200">
-        <div className=" mt-6">
-          <div className="grid  gap-5">
+        <div className=" py-1">
+        <div className="grid  gap-5 mb-5">
             {/* card show hear */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 mb-4 ml-2 mr-2" data-aos="fade-right">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 mb-4 ml-2 mr-2 h-full">
               {(products && products.length > 0 ? products : bikes?.data)?.map(
                 (bike: {
+                  pricePerHour: ReactNode;
+                  brand: ReactNode;
+                  photo: string | undefined;
                   _id: Key | null | undefined;
                   name:
                     | string
@@ -275,9 +278,10 @@ const AllBikes = () => {
                     className="grid-cols-1 border border-red-500 p-5 border-r-2 shadow-2xl"
                     key={bike._id}
                   >
-                    <div>
+                    <div className="">
                       <img
-                        src="https://res.cloudinary.com/sayed-ltd/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1724601933/logan-weaver-lgnwvr-0fiuoIIfl9g-unsplash_1_moiaxv.jpg"
+                      className="w-full h-48 object-cover"
+                        src={bike?.photo}
                         alt=""
                       />
                     </div>
@@ -285,7 +289,7 @@ const AllBikes = () => {
                     <div className="flex">
                       <div>
                         <h1>{bike?.name}</h1>
-                        <p>location</p>
+                        <p>model: {bike?.brand}</p>
                         <NavLink
                           to={`/${bike?._id}`}
                           className="btn bg-red-500 text-white py-2 px-4 mt-7 font-bold"
@@ -294,8 +298,8 @@ const AllBikes = () => {
                         </NavLink>
                       </div>
                       <div className="ml-auto text-right">
-                        <h3>$100</h3>
-                        <p className="text-sm">DAY</p>
+                        <h3>৳{bike?.pricePerHour}</h3>
+                        <p className="text-sm">/Hour</p>
                         <p className="mt-8">991 Reviews</p>
                         <div className="">
                           <p>

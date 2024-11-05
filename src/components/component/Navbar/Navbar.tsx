@@ -4,14 +4,10 @@ import {
   useGetProfileQuery,
   // useSearchItemsQuery,
 } from "../../../redux/Bikes/BikesApi";
-// import { useAppDispatch } from "../../../redux/hooks";
-// import { addBike } from "../../../redux/features/bikeSlice";
-// import { TBike } from "../../../Types/bike";
+
 
 const Navbar = () => {
-  // const [searchQuery, setSearchQuery] = useState('');
-  // const [searchTrigger, setSearchTrigger] = useState('');
-  // const dispatch = useAppDispatch();
+
   const { data: profile } = useGetProfileQuery(undefined);
 
   console.log(profile?.data?.role);
@@ -20,38 +16,27 @@ const Navbar = () => {
 
   const isAdmin = profile?.data?.role === "admin";
 
-  // const { data: searchResults } = useSearchItemsQuery(searchTrigger);
-
-  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSearchQuery(e.target.value);
-  // };
-
-  // const handleSearch =  () => {
-  //   // Trigger the search by updating searchTrigger state
-  //   setSearchTrigger(searchQuery);
-  //   console.log(searchResults)
-  //   try {
-  //     // Wait for the search results to be fetched based on the updated searchTrigger
-  //     const results =  searchResults; // Wait for searchResults to be available
-
-  //     if (results?.length > 0) {
-  //       // Dispatch each bike individually to the Redux store
-  //       results.forEach((bike: TBike) => {
-  //         dispatch(addBike(bike));
-  //       });
-  //     } else {
-  //       console.log("No bikes found");
-  //     }
-
-  //     console.log("Search results:", results);
-  //   } catch (error) {
-  //     console.error("Error fetching search results:", error);
-  //   }
-  // };
+  
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken')
-  }
+    // Remove the authentication token from local storage
+    localStorage.removeItem('authToken');
+  
+    // Optionally, clear any other data related to the user (e.g., user info, preferences)
+    localStorage.removeItem('userData'); // Example if you store additional user data
+    
+    // Optionally, clear the session storage if you are using it
+    sessionStorage.clear();
+  
+    // Redirect to the login or home page
+    window.location.href = '/login'; // Adjust the path as needed
+    
+    // If using a state management library (like Redux or Context API), reset any user state
+    // dispatch({ type: 'LOGOUT' });
+    
+    console.log('User logged out successfully');
+  };
+  
 
   useEffect(() => {}, []);
   return (
@@ -155,22 +140,6 @@ const Navbar = () => {
       </div>
 
       <div className="flex navbar-end">
-        {/* <div className="hidden sm:block">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={handleInputChange}
-            placeholder="Search items"
-            className="px-4 py-2 rounded-md"
-          />
-          <NavLink
-          to='/search-result'
-            onClick={handleSearch}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md ml-2"
-          >
-            Search
-          </NavLink>
-        </div> */}
         <div>
           {userExist ? (
             <NavLink 
@@ -205,22 +174,11 @@ const Navbar = () => {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              {/* <span className="badge badge-sm indicator-item text-red-500 ">
-                {products?.length}
-              </span> */}
+              
             </div>
           </div>
         </div>
       </div>
-      {/* {data && (
-        <div className="grid grid-cols-3 gap-4 mt-4">
-          {data?.map(
-            (product: IProduct, index: Key | null | undefined) => (
-              <ProductCard key={index} product={product} />
-            )
-          )}
-        </div>
-      )} */}
     </div>
   );
 };

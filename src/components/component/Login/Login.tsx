@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useLoginMutation } from "../../../redux/Bikes/BikesApi";
 
 const Login = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -35,8 +35,9 @@ const Login = () => {
         timer: 1500,
       });
 
-      // Navigate to the home page
-      navigate("/");
+      setTimeout(() => {
+        window.location.href = 'https://bike-rental-frontend-three.vercel.app';
+    }, 1400);
 
       // Reset the form
       setFormData({
