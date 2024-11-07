@@ -20,6 +20,7 @@ import History from "../components/component/History/History";
 import SearchResults from "../components/component/SearchResult/SearchResults";
 import Dashboard from "../components/component/Dashboard/Dashboard";
 import Earnings from "../components/component/Earnings/Earnings";
+import DashboardForUser from "../components/component/DashboaedForUser/DashboaedForUser";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,20 @@ const router = createBrowserRouter([
         element: <SingleRental />,
       },
       {
+        path: "user/dashboard/",
+        element: (
+          <ProtectedRoute role="user">
+            <DashboardForUser />
+          </ProtectedRoute>
+        ),
+        children: [
+          {
+            path : "my-rental",
+            element: <AllRentals/>,
+          }
+        ],
+      },
+      {
         path: "/admin-dashboard/",
         element: (
           <ProtectedRoute role="admin">
@@ -90,7 +105,7 @@ const router = createBrowserRouter([
             path: "dashboard",
             element: (
               <ProtectedRoute role="admin">
-                <Dashboard/>
+                <Dashboard />
               </ProtectedRoute>
             ),
           },
@@ -98,7 +113,7 @@ const router = createBrowserRouter([
             path: "earnings",
             element: (
               <ProtectedRoute role="admin">
-                <Earnings/>
+                <Earnings />
               </ProtectedRoute>
             ),
           },

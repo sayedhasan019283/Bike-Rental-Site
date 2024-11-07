@@ -2,7 +2,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import {
   FaTachometerAlt,
   FaUserShield,
-  FaShoppingBag,
+  // FaShoppingBag,
   FaBox,
   FaDollarSign,
   FaPowerOff,
@@ -46,8 +46,6 @@ const AdminDashboard = () => {
                   <span className="text-black">Dashboard</span>
                 </NavLink>
               </li>
-              
-
               {/* Products */}
               <li className=" hover:bg-blue-100 rounded-lg cursor-pointer">
                 <NavLink
@@ -69,7 +67,7 @@ const AdminDashboard = () => {
               </li>
 
               {/* Orders */}
-              <li className=" hover:bg-blue-100 rounded-lg cursor-pointer">
+              {/* <li className=" hover:bg-blue-100 rounded-lg cursor-pointer">
                 <NavLink
                   className="flex items-center py-2 px-4"
                   to="/admin-dashboard/rental-history"
@@ -77,7 +75,7 @@ const AdminDashboard = () => {
                   <FaShoppingBag className="text-black mr-3" />
                   <span className="text-black">Orders</span>
                 </NavLink>
-              </li>
+              </li> */}
 
               {/* Earning Status */}
               <li className=" hover:bg-blue-100 rounded-lg cursor-pointer">

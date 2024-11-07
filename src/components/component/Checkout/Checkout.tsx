@@ -131,7 +131,7 @@ const Checkout = () => {
 
           <div className="mt-8">
             <p>
-              <span className="font-semibold text-lg">TotalCost :</span>{" "}
+              <span className="font-semibold text-lg">TotalCost :</span>10
               {totalCost}
             </p>
             <button className="bg-yellow-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-green-700 transition duration-300 mr-3"

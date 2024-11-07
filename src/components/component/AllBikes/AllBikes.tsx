@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FaSearch, FaAngleDown, FaAngleUp } from "react-icons/fa";
+import {  FaAngleDown, FaAngleUp } from "react-icons/fa";
+// FaSearch
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import {
   useGetBikesQuery,
@@ -19,13 +20,13 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 const AllBikes = () => {
   // States for each filter section
-  const [isCategoryOpen, setIsCategoryOpen] = useState(true);
+  // const [isCategoryOpen, setIsCategoryOpen] = useState(true);
   const [isCheeseOpen, setIsCheeseOpen] = useState(true);
   const [isDairyOpen, setIsDairyOpen] = useState(true);
-  const [isQuantityOpen, setIsQuantityOpen] = useState(true);
-  const [priceRange, setPriceRange] = useState([1, 15]);
-  // setFilters
-  const [filters] = useState({ brand: "", price: "" });
+  // const [isQuantityOpen, setIsQuantityOpen] = useState(true);
+  // const [priceRange, setPriceRange] = useState([1, 15]);
+
+  const [filters, setFilters] = useState({ brand: "", price: "" });
   const { data: bikes } = useGetBikesQuery(undefined);
   const { data: products } = useGetFilteredProductsQuery(filters);
   console.log(bikes?.data);
@@ -35,14 +36,17 @@ const AllBikes = () => {
   ): void => {
     setOpen((prev) => !prev);
   };
-
-  // const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   setFilters({
-  //     ...filters,
-  //     [name]: value,
-  //   });
-  // };
+  const initialFilters = { brand: "", price: "" }
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFilters({
+      ...filters,
+      [name]: value,
+    });
+  };
+  const resetFilters = () => {
+    setFilters(initialFilters);
+  };
   AOS.init();
   return (
     <div className="grid grid-cols-1  lg:grid-cols-5  ">
@@ -102,9 +106,9 @@ const AllBikes = () => {
           </div>
           <div className="mr-3"></div>
         </div> */}
-        <div className="p-4 w-64 border border-gray-200">
+        <div className="p-4 w-64  border-gray-200 py-5 mt-5">
           {/* Search Box */}
-          <div className="flex items-center mb-4">
+          {/* <div className="flex items-center mb-4">
             <input
               type="text"
               placeholder="Search..."
@@ -113,11 +117,11 @@ const AllBikes = () => {
             <button className="bg-gray-200 p-2 rounded-r">
               <FaSearch />
             </button>
-          </div>
+          </div> */}
 
           {/* Filter Sections */}
           {/* Category */}
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <button
               onClick={() => toggleSection(setIsCategoryOpen)}
               className="flex justify-between w-full"
@@ -133,7 +137,7 @@ const AllBikes = () => {
                 </label>
               </div>
             )}
-          </div>
+          </div> */}
 
           {/* Cheese */}
           <div className="mb-4">
@@ -141,18 +145,45 @@ const AllBikes = () => {
               onClick={() => toggleSection(setIsCheeseOpen)}
               className="flex justify-between w-full"
             >
-              <span>CHEESE</span>
+              <span>Brand</span>
               {isCheeseOpen ? <FaAngleUp /> : <FaAngleDown />}
             </button>
             {isCheeseOpen && (
               <div className="mt-2 ml-4">
                 <label className="flex items-center">
-                  <input type="checkbox" className="mr-2" />
-                  Cow
+                  <input type="checkbox" className="mr-2" name="brand"
+                    value="Apachi"
+                    checked={filters.brand === "Apachi"}
+                    onChange={handleFilterChange} />
+                  Apachi
                 </label>
                 <label className="flex items-center">
-                  <input type="checkbox" className="mr-2" />
-                  Goat
+                  <input type="checkbox" className="mr-2" name="brand"
+                    value="TVS"
+                    checked={filters.brand === "TVS"}
+                    onChange={handleFilterChange} />
+                  TVS
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" name="brand"
+                    value="Suzuki"
+                    checked={filters.brand === "Suzuki"}
+                    onChange={handleFilterChange} />
+                  Suzuki
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" name="brand"
+                    value="KTM"
+                    checked={filters.brand === "KTM"}
+                    onChange={handleFilterChange} />
+                  KTM
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" name="brand"
+                    value="Yamaha"
+                    checked={filters.brand === "Yamaha"}
+                    onChange={handleFilterChange} />
+                  Yamaha
                 </label>
               </div>
             )}
@@ -164,25 +195,89 @@ const AllBikes = () => {
               onClick={() => toggleSection(setIsDairyOpen)}
               className="flex justify-between w-full"
             >
-              <span>DAIRY</span>
+              <span>Price</span>
               {isDairyOpen ? <FaAngleUp /> : <FaAngleDown />}
             </button>
             {isDairyOpen && (
               <div className="mt-2 ml-4">
                 <label className="flex items-center">
-                  <input type="checkbox" className="mr-2" />
-                  Cow Milk
+                  <input type="checkbox" className="mr-2" name="price"
+                value="100"
+                checked={filters.price === "100"}
+                onChange={handleFilterChange}/>
+                  $100
                 </label>
                 <label className="flex items-center">
-                  <input type="checkbox" className="mr-2" />
-                  Goat Milk
+                  <input type="checkbox" className="mr-2" name="price"
+                value="200"
+                checked={filters.price === "200"}
+                onChange={handleFilterChange}/>
+                  $200
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" name="price"
+                value="300"
+                checked={filters.price === "300"}
+                onChange={handleFilterChange}/>
+                  $300
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" name="price"
+                value="400"
+                checked={filters.price === "400"}
+                onChange={handleFilterChange}/>
+                  $400
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" name="price"
+                value="500"
+                checked={filters.price === "500"}
+                onChange={handleFilterChange}/>
+                  $500
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" name="price"
+                value="600"
+                checked={filters.price === "600"}
+                onChange={handleFilterChange}/>
+                  $600
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" name="price"
+                value="700"
+                checked={filters.price === "700"}
+                onChange={handleFilterChange}/>
+                  $700
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" name="price"
+                value="800"
+                checked={filters.price === "800"}
+                onChange={handleFilterChange}/>
+                  $800
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" name="price"
+                value="900"
+                checked={filters.price === "900"}
+                onChange={handleFilterChange}/>
+                  $900
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" name="price"
+                value="1000"
+                checked={filters.price === "1000"}
+                onChange={handleFilterChange}/>
+                  $1000
                 </label>
               </div>
             )}
           </div>
-
+            <div className="btn bg-red-700 text-white items-center">
+            <button onClick={resetFilters}>Reset Filters</button>
+            </div>
           {/* Quantity */}
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <button
               onClick={() => toggleSection(setIsQuantityOpen)}
               className="flex justify-between w-full"
@@ -214,10 +309,10 @@ const AllBikes = () => {
                 </label>
               </div>
             )}
-          </div>
+          </div> */}
 
           {/* Price Slider */}
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <button className="flex justify-between w-full">
               <span>Price</span>
             </button>
@@ -247,7 +342,7 @@ const AllBikes = () => {
                 <span>${priceRange[1].toFixed(2)}</span>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="col-span-4 bg-base-200">
